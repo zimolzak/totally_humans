@@ -83,7 +83,7 @@ model.add(Activation('softmax'))
 model.compile(loss='categorical_crossentropy', optimizer=RMSprop(lr=0.002))
 
 model.fit(X, y, batch_size=32, nb_epoch=50)
-model.save('/output/%s.h5' % name)
+model.save('/Users/ajz/Desktop/totally_humans/%s.h5' % name)
 
 def sample(a, temperature=1.0):
     # helper function to sample an index from a probability array

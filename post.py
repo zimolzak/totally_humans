@@ -1,7 +1,7 @@
 __author__  = "Micah Price"
 __email__   = "98mprice@gmail.com"
 
-import config
+#import config
 
 from keras.models import Sequential, load_model
 from keras.layers.core import Dense, Activation, Dropout
@@ -9,7 +9,7 @@ from keras.layers.recurrent import LSTM
 from keras.utils.data_utils import get_file
 from keras.optimizers import RMSprop
 
-import praw
+#import praw
 import numpy as np
 import random
 import sys
@@ -35,7 +35,7 @@ comment_indices_word = dict((i, c) for i, c in enumerate(comment_words))
 maxlen = 30
 comment_list_words=comment_text.split()
 
-comment_model = load_model('models/comments.h5')
+comment_model = load_model('/Users/ajz/Desktop/totally_humans/titles.h5') # comments.h5
 
 with io.open('data/titles.txt', encoding='utf-8') as f:
     title_text = f.read()
@@ -48,7 +48,7 @@ title_indices_word = dict((i, c) for i, c in enumerate(title_words))
 
 title_list_words=title_text.split()
 
-title_model = load_model('models/titles.h5')
+title_model = load_model('/Users/ajz/Desktop/totally_humans/titles.h5')
 
 def generate_comments(length):
     start_index = random.randint(0, len(comment_list_words) - maxlen - 1)
@@ -105,11 +105,11 @@ def generate_title():
         str = str[0:300]
     return str
 
-reddit = praw.Reddit(client_id=config.client_id,
-                     client_secret=config.client_secret,
-                     user_agent=config.user_agent,
-                     username=config.username,
-                     password=config.password)
+# reddit = praw.Reddit(client_id='config.client_id',
+#                      client_secret='config.client_secret',
+#                      user_agent='config.user_agent',
+#                      username='config.username',
+#                      password='config.password')
 
 def post_comment_chain(submission, comment_chain):
     if len(comment_chain[0]) > 0:
@@ -135,4 +135,5 @@ def post_to_reddit():
         if len(comment_chain) > 0:
             post_comment_chain(submission, comment_chain)
 
-post_to_reddit()
+if __name__ == '__main__':
+    post_to_reddit()
